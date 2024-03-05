@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 
 // importation du code des sous routeurs
 import notesRouter from './routes/notes.js';
+import usersRouter from './routes/users.js';
 
 var app = express();
 
@@ -19,10 +20,11 @@ app.use(json());
 
 // Initialisation du Router
 app.use('/notes', notesRouter);
+app.use('/users', usersRouter);
 app.use('/', (req, res) => res.send('et oui on vous souhaite la bienvenue!'));
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
@@ -33,22 +35,22 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-      res.status(err.status || 500);
-      res.render('error', {
-          message: err.message,
-          error: err
-      });
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
-      message: err.message,
-      error: {}
+    message: err.message,
+    error: {}
   });
 });
 
